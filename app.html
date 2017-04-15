@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.bootcss.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://cdn.bootcss.com/vue/2.2.6/vue.min.js"></script>
+    </head>
+    <body>
+    <div class="container">
+        <div class="col-md-12 ">
+            <div id="app">
+              <table class="table table-hover" v-cloak>
+                <thead>
+                  <tr>
+                    <th class="text-right" @click="sortBy('id')">序号</th>
+                    <th class="text-right" @click="sortBy('name')">商品名</th>                           
+                    <th class="text-right" @click="sortBy('classify')">分类</th>                             
+                    <th class="text-right" @click="sortBy('price')">价格(元)</th>                             
+                    <th class="text-right" >操作</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="thing in things">
+                    <td class="text-right">{{thing.id}}</td>
+                    <td class="text-right">{{thing.name}}</td>
+                    <td class="text-right">{{thing.classify}}</td>
+                    <td class="text-right">{{thing.price}}</td>
+                    <template v-if="thing.id%2==0">
+                        <td class="text-right">
+                            <button type="button" class="btn btn-success" @click="delthing(thing)">删除</button>
+                        </td>
+                    </template>
+                    <template v-else>
+                         <td class="text-right">
+                            <button type="button" class="btn btn-danger" @click="delthing(thing)">删除</button>     
+                         </td>
+                    </template>
+                  </tr>
+                  <tr>
+                    <td class="text-right" colspan="5">
+                      <h4>总价：{{sum}}元</h4>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div id="add-thing">
+                <legend>添加商品</legend>
+                <div class="form-group">
+                  <label>商品名</label>
+                  <input type="text" class='form-control' v-model="thing.name">
+                </div>
+                 <div class="form-group">
+                  <label>分类</label>
+                  <input type="text" class='form-control' v-model="thing.classify">
+                </div>
+                 <div class="form-group">
+                  <label>价格</label>
+                  <input type="text" class='form-control' v-model="thing.price">
+                </div>
+                 <button class="btn btn-primary btn-block" @click="addthing()">添加</button>
+              </div>
+            </div>
+        </div>
+    </div>
+    <script src="app.js"></script>
+    </body>
+</html>
